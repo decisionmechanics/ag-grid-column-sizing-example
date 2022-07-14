@@ -36,8 +36,10 @@ const App = () => {
         columnDefs={columnDefinitions}
         rowData={data}
         onFirstDataRendered={(params) => {
-          params.columnApi.autoSizeAllColumns(true);
+          params.columnApi.autoSizeAllColumns(false);
         }}
+        suppressColumnVirtualisation={true}
+        suppressRowVirtualisation={true}
       />
     </div>
   );

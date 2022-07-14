@@ -1,10 +1,10 @@
 # ag-grid Column Sizing Problem Minimal Example
 
-The React Data Grid doesn't seem to size all columns correctly when `autoSizeAllColumns(true)` is called.
+The React Data Grid doesn't seem to correctly size the first column when `autoSizeAllColumns(false)` is called.
 
-Columns 1970-1974 seem OK, but columns from 1975 onwards aren't sized.
+`suppressColumnVirtualisation` and `suppressRowVirtualisation` are both set to `true`.
 
-The following versions of packages are used:
+The following packages are used:
 
 - ag-grid-community: 28.0.2
 - ag-grid-react: 28.0.0
