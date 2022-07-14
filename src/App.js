@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import { AgGridReact } from "ag-grid-react";
+import "ag-grid-community/dist/styles/ag-grid.css";
+import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 
-function App() {
+const createAnnualData = () =>
+  Array.from({ length: 63 }, (_, i) => i + 1970).reduce((accumlation, year) => {
+    accumlation[year] = (1.5 + Math.random()).toFixed(2);
+    return accumlation;
+  }, {});
+
+const App = () => {
+  const columnDefinitions = [
+    {
+      field: "ratio",
+      headerName: "",
+    },
+    ...Array.from({ length: 63 }, (_, i) => i + 1970).map((year) => ({
+      field: year.toString(),
+    })),
+  ];
+
+  const data = [
+    {
+      ratio: "<12 months on ART",
+      ...createAnnualData(),
+    },
+    {
+      ratio: "12+ months on ART",
+      ...createAnnualData(),
+    },
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="ag-theme-alpine" style={{ height: 400, width: 800 }}>
+      <AgGridReact
+        columnDefs={columnDefinitions}
+        rowData={data}
+        onFirstDataRendered={(params) => {
+          params.columnApi.autoSizeAllColumns(true);
+        }}
+      />
     </div>
   );
-}
+};
 
 export default App;
