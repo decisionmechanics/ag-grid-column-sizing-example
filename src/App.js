@@ -11,21 +11,40 @@ const createAnnualData = () =>
 const App = () => {
   const columnDefinitions = [
     {
-      field: "ratio",
       headerName: "",
+      children: [
+        {
+          field: "ratio",
+          headerName: "",
+        },
+      ],
     },
-    ...Array.from({ length: 63 }, (_, i) => i + 1970).map((year) => ({
-      field: year.toString(),
-    })),
+    {
+      headerName: "Dummy",
+      children: [
+        {
+          field: "dummy",
+          headerName: "",
+        },
+      ],
+    },
+    {
+      headerName: "Year",
+      children: Array.from({ length: 63 }, (_, i) => i + 1970).map((year) => ({
+        field: year.toString(),
+      })),
+    },
   ];
 
   const data = [
     {
       ratio: "<12 months on ART",
+      dummy: 0,
       ...createAnnualData(),
     },
     {
       ratio: "12+ months on ART",
+      dummy: 0,
       ...createAnnualData(),
     },
   ];
